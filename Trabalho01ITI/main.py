@@ -16,3 +16,8 @@ if __name__ == "__main__":
     # Descompressão
     decompressed_text = decode(compressed_text, table)
     print("Texto Descomprimido:", decompressed_text)
+
+    # Cálculo da razão de compressão
+    media_bits_por_simbolo = len(compressed_text) / len(input_text.replace(" ", "")) 
+    razão_compressao = 5 / media_bits_por_simbolo
+    print(f"Razão de Compressão: {razão_compressao:.2f}")
