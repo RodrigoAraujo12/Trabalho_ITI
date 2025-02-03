@@ -4,16 +4,25 @@ def build_shannon_fano_table(symbols):
 
     # Ordenar por frequência
     symbols.sort(key=lambda x: x[1], reverse=True)
-    
-    # Encontrar ponto de divisão
-    total = sum(freq for _, freq in symbols)
-    cumulative = 0
-    split_index = 0
-    for i, (_, freq) in enumerate(symbols):
-        cumulative += freq
-        if cumulative >= total / 2:
-            split_index = i
-            break
+
+    # Encontrar ponto de divisão ideal
+    def find_best_split(symbols):
+        total = sum(freq for _, freq in symbols)
+        cumulative = 0
+        best_split = 0
+        min_diff = float("inf")
+
+        for i, (_, freq) in enumerate(symbols):
+            cumulative += freq
+            diff = abs((total - cumulative) - cumulative)  # Diferença entre os grupos
+
+            if diff < min_diff:
+                min_diff = diff
+                best_split = i
+
+        return best_split
+
+    split_index = find_best_split(symbols)
 
     # Recursão para os dois grupos
     left = build_shannon_fano_table(symbols[:split_index + 1])
