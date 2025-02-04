@@ -18,6 +18,7 @@ if __name__ == "__main__":
     print("Texto Descomprimido:", decompressed_text)
 
     # Cálculo da razão de compressão
-    media_bits_por_simbolo = len(compressed_text) / len(input_text.replace(" ", "")) 
-    razão_compressao = 5 / media_bits_por_simbolo
+    tamanho_original = len(input_text) * 8  # Cada caractere tem 8 bits no texto original
+    tamanho_comprimido = len(compressed_text)  # Já está em bits
+    razão_compressao = tamanho_original / tamanho_comprimido
     print(f"Razão de Compressão: {razão_compressao:.2f}")
