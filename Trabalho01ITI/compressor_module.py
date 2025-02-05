@@ -64,9 +64,7 @@ def shannon_fano_compress(text):
     # Codificar o texto
     compressed = encode(text, coding_table)
 
-    # Calcular bits de preenchimento para que seja múltiplo de 8
-    padding_size = (8 - len(compressed) % 8) % 8  # Garante que padding_size fique entre 0 e 7
-    compressed += "0" * padding_size  # Adiciona os bits extras ao final
+    compressed, padding_size = pad_to_bytes(compressed)
 
-    ## return compressed, coding_table
     return compressed, coding_table, padding_size
+
